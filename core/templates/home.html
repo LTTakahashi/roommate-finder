@@ -1,13 +1,5 @@
-<!-- core/templates/home.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Roommate Finder Home</title>
-</head>
-<body>
-    <h1>Welcome to Roommate Finder!</h1>
-    <a href="/register/">Register</a>
-    <a href="/login/">Login</a>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Welcome to Roommate Finder!</h2>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Search Profiles</h2>
+
+  <form method="get">
+    <input type="text" name="q" placeholder="Search by username, location, or bio..." value="{{ query }}">
+    <button type="submit">Search</button>
+  </form>
+
+  {% if profiles %}
+    <h3>Search Results:</h3>
+    <ul>
+      {% for profile in profiles %}
+        <li>
+          <strong>{{ profile.user.username }}</strong><br>
+          Location: {{ profile.location }}<br>
+          Age: {{ profile.age }}<br>
+          Bio: {{ profile.bio }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% elif query %}
+    <p>No profiles found matching "{{ query }}".</p>
+  {% endif %}
+{% endblock %}

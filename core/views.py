@@ -3,6 +3,9 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import UserRegisterForm, UserLoginForm, ProfileUpdateForm
+from django.db.models import Q
+from .models import Profile
+
 
 def home(request):
     return render(request, 'home.html')
@@ -49,3 +52,21 @@ def profile(request):
 def logout_view(request):
     logout(request)
     return redirect('home')
+
+@login_required
+def search_profiles(request):
+    query = request.GET.get('q', '')
+    results = []
+
+    if query:
+        results = Profile.objects.filter(
+            Q(user__username__icontains=query) |
+            Q(location__icontains=query) |
+            Q(bio__icontains=query)
+        )
+
+    context = {
+        'profiles': results,
+        'query': query,
+    }
+    return render(request, 'search.html', context)

@@ -1,17 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Roommate Finder</title>
+    <title>Roommate Finder</title>
 </head>
 <body>
-  {% if user.is_authenticated %}
-    <p>Hello, {{ user.username }}! <a href="{% url 'logout' %}">Logout</a></p>
-  {% else %}
-    <a href="{% url 'login' %}">Login</a> | <a href="{% url 'register' %}">Register</a>
-  {% endif %}
+    {% if user.is_authenticated %}
+        <p>
+            Hello, {{ user.username }}!
+            <a href="{% url 'profile' %}">Profile</a> |
+            <a href="{% url 'search_profiles' %}">Search Profiles</a> |
+            <a href="{% url 'logout' %}">Logout</a>
+        </p>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a> |
+        <a href="{% url 'register' %}">Register</a>
+    {% endif %}
 
-  {% block content %}
-  {% endblock %}
+    <!-- This is the critical missing piece! -->
+    {% block content %}
+    {% endblock %}
 </body>
 </html>
