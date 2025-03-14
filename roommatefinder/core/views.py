@@ -28,3 +28,11 @@ def update_profile(request):
     else:
         form = ProfileForm(instance=profile)
     return render(request, 'update_profile.html', {'form': form})
+
+
+def search_profiles(request):
+    query_location = request.GET.get('location', '')
+    profiles = Profile.objects.all()
+    if query_location:
+        profiles = profiles.filter(location__icontains=query_location)
+    return render(request, 'search.html', {'profiles': profiles})

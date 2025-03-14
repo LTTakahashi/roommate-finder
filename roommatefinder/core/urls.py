@@ -18,4 +18,6 @@ urlpatterns = [
     path('chat/<str:room_name>/', views.chat_room, name='chat_room'),
 
     path('profile/', update_profile, name='update_profile'),
+
+    path('search/', search_profiles, name='search_profiles'),
 ]

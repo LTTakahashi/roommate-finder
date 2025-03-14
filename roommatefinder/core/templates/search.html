@@ -1,0 +1,17 @@
+<h2>Search Profiles</h2>
+<form method=\"GET\" action=\"\">
+    <input type=\"text\" name=\"location\" placeholder=\"Location\" />
+    <button type=\"submit\">Search</button>
+</form>
+
+<hr>
+
+{% if profiles %}
+    <ul>
+    {% for p in profiles %}
+        <li>{{ p.user.username }} ({{ p.location }})</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No results</p>
+{% endif %}
