@@ -7,9 +7,13 @@
     {% if user.is_authenticated %}
         <p>
             Hello, {{ user.username }}!
-            <a href="{% url 'profile' %}">Profile</a> |
-            <a href="{% url 'search_profiles' %}">Search Profiles</a> |
-            <a href="{% url 'logout' %}">Logout</a>
+            <a href="{% url 'profile' %}">Profile🧑</a> |
+            <a href="{% url 'search_profiles' %}">Search Profiles🔍</a> |
+            <a href="{% url 'logout' %}">Logout🏃</a> |
+            {% comment %}
+                incomplete fix when chat system added
+            {% endcomment %}
+            <a href="{% url 'profile' %}">Chat💬</a>
         </p>
     {% else %}
         <a href="{% url 'login' %}">Login</a> |
