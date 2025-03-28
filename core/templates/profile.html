@@ -3,9 +3,90 @@
 {% block content %}
 <h2>Your Profile</h2>
 
-<form method="POST">
+<form method="POST" style="margin: 20px;">
     {% csrf_token %}
-    {{ form.as_p }}
+    <div>
+        <label for="id_name">Name:</label>
+        <input type="text" name="name" id="id_name" value="{{ form.name.value|default:'' }}" style="width: 100%; padding: 10px; margin: 10px 0;">
+    </div>
+    
+    <div>
+        <label for="id_age">Age:</label>
+        <input type="number" name="age" id="id_age" value="{{ form.age.value|default:'' }}" style="width: 100%; padding: 10px; margin: 10px 0;">
+    </div>
+    
+    <div>
+        <label for="id_gender">Gender:</label>
+        <select name="gender" id="id_gender" style="width: 100%; padding: 10px; margin: 10px 0;">
+            <option value="" {% if not form.gender.value %}selected{% endif %}>---------</option>
+            <option value="Other" {% if form.gender.value == 'Other' %}selected{% endif %}>Other</option>
+            <option value="Male" {% if form.gender.value == 'Male' %}selected{% endif %}>Male</option>
+            <option value="Female" {% if form.gender.value == 'Female' %}selected{% endif %}>Female</option>
+        </select>
+    </div>
+    
+    <div>
+        <label for="id_bio">Bio:</label>
+        <textarea name="bio" id="id_bio" style="width: 100%; padding: 10px; margin: 10px 0;">{{ form.bio.value|default:'' }}</textarea>
+    </div>
+    
+    <div>
+        <label for="id_location">Location:</label>
+        <input type="text" name="location" id="id_location" value="{{ form.location.value|default:'' }}" style="width: 100%; padding: 10px; margin: 10px 0;">
+    </div>
+    
+    <div>
+        <label for="id_budget">Budget:</label>
+        <input type="number" step="0.01" name="budget" id="id_budget" value="{{ form.budget.value|default:'' }}" style="width: 100%; padding: 10px; margin: 10px 0;">
+    </div>
+    
+    <div>
+        <label for="id_pet">Pet:</label>
+        <select name="pet" id="id_pet" style="width: 100%; padding: 10px; margin: 10px 0;">
+            <option value="Pet Preference" {% if form.pet.value == 'Pet Preference' %}selected{% endif %}>Pet Preference</option>
+            <option value="No Pets" {% if form.pet.value == 'No Pets' %}selected{% endif %}>No Pets</option>
+            <option value="I have a pet/ no preference" {% if form.pet.value == 'I have a pet/ no preference' %}selected{% endif %}>I have a pet/ no preference</option>
+        </select>
+    </div>
+    
+    <div>
+        <label for="id_smoke">Smoke:</label>
+        <select name="smoke" id="id_smoke" style="width: 100%; padding: 10px; margin: 10px 0;">
+            <option value="Smoke Preference" {% if form.smoke.value == 'Smoke Preference' %}selected{% endif %}>Smoke Preference</option>
+            <option value="I smoke/ no preference" {% if form.smoke.value == 'I smoke/ no preference' %}selected{% endif %}>I smoke/ no preference</option>
+            <option value="No Smoking" {% if form.smoke.value == 'No Smoking' %}selected{% endif %}>No Smoking</option>
+        </select>
+    </div>
+    
+    <div>
+        <label for="id_loudness">Loudness:</label>
+        <select name="loudness" id="id_loudness" style="width: 100%; padding: 10px; margin: 10px 0;">
+            <option value="Volume Preference" {% if form.loudness.value == 'Volume Preference' %}selected{% endif %}>Volume Preference</option>
+            <option value="Quiet" {% if form.loudness.value == 'Quiet' %}selected{% endif %}>Quiet</option>
+            <option value="Moderate with occasional loudness" {% if form.loudness.value == 'Moderate with occasional loudness' %}selected{% endif %}>Moderate with occasional loudness</option>
+            <option value="No preference" {% if form.loudness.value == 'No preference' %}selected{% endif %}>No preference</option>
+        </select>
+    </div>
+    
+    <div>
+        <label for="id_cleanliness">Cleanliness:</label>
+        <select name="cleanliness" id="id_cleanliness" style="width: 100%; padding: 10px; margin: 10px 0;">
+            <option value="Hygiene/Area Preference" {% if form.cleanliness.value == 'Hygiene/Area Preference' %}selected{% endif %}>Hygiene/Area Preference</option>
+            <option value="No preference" {% if form.cleanliness.value == 'No preference' %}selected{% endif %}>No preference</option>
+            <option value="I prefer a standard clean hygiene/area" {% if form.cleanliness.value == 'I prefer a standard clean hygiene/area' %}selected{% endif %}>I prefer a standard clean hygiene/area</option>
+            <option value="I prefer an above standard clean hygiene/area" {% if form.cleanliness.value == 'I prefer an above standard clean hygiene/area' %}selected{% endif %}>I prefer an above standard clean hygiene/area</option>
+        </select>
+    </div>
+    
+    <div>
+        <label for="id_gender_preference">Gender Preference:</label>
+        <select name="gender_preference" id="id_gender_preference" style="width: 100%; padding: 10px; margin: 10px 0;">
+            <option value="Any" {% if form.gender_preference.value == 'Any' %}selected{% endif %}>Any</option>
+            <option value="Male" {% if form.gender_preference.value == 'Male' %}selected{% endif %}>Male</option>
+            <option value="Female" {% if form.gender_preference.value == 'Female' %}selected{% endif %}>Female</option>
+        </select>
+    </div>
+    
     <button type="submit">Update Profile</button>
 </form>
 
