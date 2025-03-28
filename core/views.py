@@ -49,6 +49,21 @@ def profile(request):
     return render(request, 'profile.html', {'form': form})
 
 @login_required
+def create_profile(request):
+    if request.method == 'POST':
+        form = ProfileUpdateForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            messages.success(request, 'Profile created successfully!')
+            return redirect('profile')
+    else:
+        form = ProfileUpdateForm()
+
+    return render(request, 'create_profile.html', {'form': form})
+
+@login_required
 def logout_view(request):
     logout(request)
     return redirect('home')
