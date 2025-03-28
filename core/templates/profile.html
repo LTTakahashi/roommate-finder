@@ -22,9 +22,6 @@
             <option value="Other" {% if form.gender.value == 'Other' %}selected{% endif %}>Other</option>
             <option value="Male" {% if form.gender.value == 'Male' %}selected{% endif %}>Male</option>
             <option value="Female" {% if form.gender.value == 'Female' %}selected{% endif %}>Female</option>
-            <option value="Other" {% if form.gender.value == 'Other' %}selected{% endif %}>Other</option>
-            <option value="Male" {% if form.gender.value == 'Male' %}selected{% endif %}>Male</option>
-            <option value="Female" {% if form.gender.value == 'Female' %}selected{% endif %}>Female</option>
         </select>
     </div>
     
@@ -49,9 +46,6 @@
             <option value="Pet Preference" {% if form.pet.value == 'Pet Preference' %}selected{% endif %}>Pet Preference</option>
             <option value="No Pets" {% if form.pet.value == 'No Pets' %}selected{% endif %}>No Pets</option>
             <option value="I have a pet/ no preference" {% if form.pet.value == 'I have a pet/ no preference' %}selected{% endif %}>I have a pet/ no preference</option>
-            <option value="Pet Preference" {% if form.pet.value == 'Pet Preference' %}selected{% endif %}>Pet Preference</option>
-            <option value="No Pets" {% if form.pet.value == 'No Pets' %}selected{% endif %}>No Pets</option>
-            <option value="I have a pet/ no preference" {% if form.pet.value == 'I have a pet/ no preference' %}selected{% endif %}>I have a pet/ no preference</option>
         </select>
     </div>
     
@@ -61,19 +55,12 @@
             <option value="Smoke Preference" {% if form.smoke.value == 'Smoke Preference' %}selected{% endif %}>Smoke Preference</option>
             <option value="I smoke/ no preference" {% if form.smoke.value == 'I smoke/ no preference' %}selected{% endif %}>I smoke/ no preference</option>
             <option value="No Smoking" {% if form.smoke.value == 'No Smoking' %}selected{% endif %}>No Smoking</option>
-            <option value="Smoke Preference" {% if form.smoke.value == 'Smoke Preference' %}selected{% endif %}>Smoke Preference</option>
-            <option value="I smoke/ no preference" {% if form.smoke.value == 'I smoke/ no preference' %}selected{% endif %}>I smoke/ no preference</option>
-            <option value="No Smoking" {% if form.smoke.value == 'No Smoking' %}selected{% endif %}>No Smoking</option>
         </select>
     </div>
     
     <div>
         <label for="id_loudness">Loudness:</label>
         <select name="loudness" id="id_loudness" style="width: 100%; padding: 10px; margin: 10px 0;">
-            <option value="Volume Preference" {% if form.loudness.value == 'Volume Preference' %}selected{% endif %}>Volume Preference</option>
-            <option value="Quiet" {% if form.loudness.value == 'Quiet' %}selected{% endif %}>Quiet</option>
-            <option value="Moderate with occasional loudness" {% if form.loudness.value == 'Moderate with occasional loudness' %}selected{% endif %}>Moderate with occasional loudness</option>
-            <option value="No preference" {% if form.loudness.value == 'No preference' %}selected{% endif %}>No preference</option>
             <option value="Volume Preference" {% if form.loudness.value == 'Volume Preference' %}selected{% endif %}>Volume Preference</option>
             <option value="Quiet" {% if form.loudness.value == 'Quiet' %}selected{% endif %}>Quiet</option>
             <option value="Moderate with occasional loudness" {% if form.loudness.value == 'Moderate with occasional loudness' %}selected{% endif %}>Moderate with occasional loudness</option>
@@ -88,19 +75,12 @@
             <option value="No preference" {% if form.cleanliness.value == 'No preference' %}selected{% endif %}>No preference</option>
             <option value="I prefer a standard clean hygiene/area" {% if form.cleanliness.value == 'I prefer a standard clean hygiene/area' %}selected{% endif %}>I prefer a standard clean hygiene/area</option>
             <option value="I prefer an above standard clean hygiene/area" {% if form.cleanliness.value == 'I prefer an above standard clean hygiene/area' %}selected{% endif %}>I prefer an above standard clean hygiene/area</option>
-            <option value="Hygiene/Area Preference" {% if form.cleanliness.value == 'Hygiene/Area Preference' %}selected{% endif %}>Hygiene/Area Preference</option>
-            <option value="No preference" {% if form.cleanliness.value == 'No preference' %}selected{% endif %}>No preference</option>
-            <option value="I prefer a standard clean hygiene/area" {% if form.cleanliness.value == 'I prefer a standard clean hygiene/area' %}selected{% endif %}>I prefer a standard clean hygiene/area</option>
-            <option value="I prefer an above standard clean hygiene/area" {% if form.cleanliness.value == 'I prefer an above standard clean hygiene/area' %}selected{% endif %}>I prefer an above standard clean hygiene/area</option>
         </select>
     </div>
     
     <div>
         <label for="id_gender_preference">Gender Preference:</label>
         <select name="gender_preference" id="id_gender_preference" style="width: 100%; padding: 10px; margin: 10px 0;">
-            <option value="Any" {% if form.gender_preference.value == 'Any' %}selected{% endif %}>Any</option>
-            <option value="Male" {% if form.gender_preference.value == 'Male' %}selected{% endif %}>Male</option>
-            <option value="Female" {% if form.gender_preference.value == 'Female' %}selected{% endif %}>Female</option>
             <option value="Any" {% if form.gender_preference.value == 'Any' %}selected{% endif %}>Any</option>
             <option value="Male" {% if form.gender_preference.value == 'Male' %}selected{% endif %}>Male</option>
             <option value="Female" {% if form.gender_preference.value == 'Female' %}selected{% endif %}>Female</option>
