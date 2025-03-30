@@ -1,23 +1,34 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
-    <title>Roommate Finder</title>
+    <title>
+        {% block  title%}
+        Roommate Finder
+        {% endblock  %}
+    </title>
+    <link rel = "stylesheet" href="{%static 'css/style.css' %}">
 </head>
 <body>
     {% if user.is_authenticated %}
-        <p>
+        <nav>
+            <style>
+                #link {color #ffffff}
+            </style>
             Hello, {{ user.username }}!
-            <a href="{% url 'profile' %}">Profile🧑</a> |
-            <a href="{% url 'search_profiles' %}">Search Profiles🔍</a> |
-            <a href="{% url 'logout' %}">Logout🏃</a> |
+            <a href="{% url 'profile' %}" style="color: white;">Profile🧑</a> |
+            <a href="{% url 'search_profiles' %}" style="color: white;">Search Profiles🔍</a> |
+            <a href="{% url 'logout' %}" style="color: white;" style="color: white;">Logout🏃</a> |
             {% comment %}
                 incomplete fix when chat system added
             {% endcomment %}
-            <a href="{% url 'profile' %}">Chat💬</a>
-        </p>
+            <a href="{% url 'profile' %}" style="color: white;">Chat💬</a>
+        </nav>
     {% else %}
-        <a href="{% url 'login' %}">Login</a> |
-        <a href="{% url 'register' %}">Register</a>
+        <nav>
+            <a href="{% url 'login' %}" style="color: white;">Login🚪</a> |
+            <a href="{% url 'register' %}" style="color: white;">Register📋</a>
+        </nav>
     {% endif %}
 
     <!-- This is the critical missing piece! -->

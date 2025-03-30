@@ -1,0 +1,19 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body,title,head {
+    place-content: center;
+    background-color: white;
+}
+h1, p, button, form {
+    margin-top: 20;
+    text-align: center;
+    padding: 3px;
+}
+h2{
+    background-color: crimson;
+    color: white;
+    font-size: 1.5rem;
+}

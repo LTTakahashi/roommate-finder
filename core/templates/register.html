@@ -1,4 +1,8 @@
-<h2>Register</h2>
+{% load static %}
+<h2>
+  <link rel = "stylesheet" href="{%static 'css/signin.css' %}">
+  Register
+</h2>
 <form method="POST">
   {% csrf_token %}
   {{ form.as_p }}
