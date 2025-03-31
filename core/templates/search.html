@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Search Profiles</h2>
+<h2>Search Profiles</h2>
 
-  <form method="get">
+<form method="get">
     <input type="text" name="q" placeholder="Search by username, location, or bio..." value="{{ query }}">
     <button type="submit">Search</button>
-  </form>
+</form>
 
-  {% if profiles %}
+{% if profiles %}
     <h3>Search Results:</h3>
     <ul>
       {% for profile in profiles %}
@@ -16,11 +16,14 @@
           <strong>{{ profile.user.username }}</strong><br>
           Location: {{ profile.location }}<br>
           Age: {{ profile.age }}<br>
-          Bio: {{ profile.bio }}
+          Bio: {{ profile.bio }}<br>
+
+          <!-- ✅ Correct link format -->
+          <a href="{% url 'chat_room' profile.user.username %}">Message</a>
         </li>
       {% endfor %}
     </ul>
-  {% elif query %}
+{% elif query %}
     <p>No profiles found matching "{{ query }}".</p>
-  {% endif %}
+{% endif %}
 {% endblock %}
