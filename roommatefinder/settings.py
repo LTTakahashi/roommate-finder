@@ -89,7 +89,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'roommatefinder.wsgi.application'
 
-DATABASE_URL = os.environ.get('DATABASE_URL')
+DATABASE_URL = "postgresql://roommatefinder_db_user:dXpLnFdgTJNqAIIxh6nVLKFf59zfVdbP@dpg-cvlgaa56ubrc73cgfggg-a/roommatefinder_db"
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
