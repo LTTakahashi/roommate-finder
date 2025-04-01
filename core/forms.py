@@ -20,3 +20,10 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['location', 'bio', 'age', 'profile_picture']
+
+class ProfileFilterForm(forms.Form):
+    username = forms.CharField(required=False, label='Username')
+    location = forms.CharField(required=False, label='Location')
+    min_age = forms.IntegerField(required=False, label='Min Age')
+    max_age = forms.IntegerField(required=False, label='Max Age')
+    bio_keyword = forms.CharField(required=False, label='Bio Keyword')

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import UserRegisterForm, UserLoginForm, ProfileUpdateForm
+from .forms import UserRegisterForm, UserLoginForm, ProfileUpdateForm, ProfileFilterForm
 from django.db.models import Q
 from .models import Profile
 
@@ -57,19 +57,35 @@ def logout_view(request):
 
 @login_required
 def search_profiles(request):
-    query = request.GET.get('q', '')
-    results = []
+    form = ProfileFilterForm(request.GET or None)
+    results = Profile.objects.none()  # default empty if no search
 
-    if query:
-        results = Profile.objects.filter(
-            Q(user__username__icontains=query) |
-            Q(location__icontains=query) |
-            Q(bio__icontains=query)
-        )
+    if form.is_valid():
+        username = form.cleaned_data.get('username')
+        location = form.cleaned_data.get('location')
+        min_age = form.cleaned_data.get('min_age')
+        max_age = form.cleaned_data.get('max_age')
+        bio_keyword = form.cleaned_data.get('bio_keyword')
+
+        # Start building a Q object
+        query = Q()
+        
+        if username:
+            query &= Q(user__username__icontains=username)
+        if location:
+            query &= Q(location__icontains=location)
+        if min_age is not None:
+            query &= Q(age__gte=min_age)
+        if max_age is not None:
+            query &= Q(age__lte=max_age)
+        if bio_keyword:
+            query &= Q(bio__icontains=bio_keyword)
+
+        results = Profile.objects.filter(query)
 
     context = {
-        'profiles': results,
-        'query': query,
+        'form': form,
+        'profiles': results
     }
     return render(request, 'search.html', context)
 
