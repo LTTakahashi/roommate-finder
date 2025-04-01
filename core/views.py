@@ -57,19 +57,20 @@ def logout_view(request):
 
 @login_required
 def search_profiles(request):
+    # Initialize the advanced filter form with GET data
     form = ProfileFilterForm(request.GET or None)
-    results = Profile.objects.none()  # default empty if no search
+    results = Profile.objects.none()  # default empty queryset
 
     if form.is_valid():
+        # Retrieve filter criteria from the form
         username = form.cleaned_data.get('username')
         location = form.cleaned_data.get('location')
         min_age = form.cleaned_data.get('min_age')
         max_age = form.cleaned_data.get('max_age')
         bio_keyword = form.cleaned_data.get('bio_keyword')
 
-        # Start building a Q object
+        # Build the query dynamically
         query = Q()
-        
         if username:
             query &= Q(user__username__icontains=username)
         if location:
@@ -85,7 +86,7 @@ def search_profiles(request):
 
     context = {
         'form': form,
-        'profiles': results
+        'profiles': results,
     }
     return render(request, 'search.html', context)
 
