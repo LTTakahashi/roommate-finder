@@ -4,7 +4,7 @@
 <h2>Search Profiles</h2>
 
 <form method="get">
-    <input type="text" name="q" placeholder="Search by username, location, or bio..." value="{{ query }}">
+    {{ form.as_p }}
     <button type="submit">Search</button>
 </form>
 
@@ -18,12 +18,11 @@
           Age: {{ profile.age }}<br>
           Bio: {{ profile.bio }}<br>
 
-          <!-- ✅ Correct link format -->
           <a href="{% url 'chat_room' profile.user.username %}">Message</a>
         </li>
       {% endfor %}
     </ul>
-{% elif query %}
-    <p>No profiles found matching "{{ query }}".</p>
+{% elif form.is_bound %}
+    <p>No profiles found with these filters.</p>
 {% endif %}
 {% endblock %}
