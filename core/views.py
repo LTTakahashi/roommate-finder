@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,  get_object_or_404
+from django.contrib.auth.models import User
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -38,16 +39,17 @@ def login_view(request):
 @login_required
 def profile(request):
     if request.method == 'POST':
-        form = ProfileUpdateForm(request.POST, instance=request.user.profile)
+        form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
         if form.is_valid():
             form.save()
             messages.success(request, 'Profile updated successfully!')
             return redirect('profile')
+        else:
+            messages.error(request, 'Please correct the error below.')
     else:
         form = ProfileUpdateForm(instance=request.user.profile)
 
     return render(request, 'profile.html', {'form': form})
-
 @login_required
 def logout_view(request):
     logout(request)
@@ -70,3 +72,14 @@ def search_profiles(request):
         'query': query,
     }
     return render(request, 'search.html', context)
+
+@login_required
+def chat_room(request, username):
+    other_user = get_object_or_404(User, username=username)
+
+    room_name = "-".join(sorted([request.user.username, other_user.username]))
+
+    return render(request, 'chat_room.html', {
+        'room_name': room_name,
+        'other_user': other_user,
+    })

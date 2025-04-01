@@ -1,13 +1,7 @@
 <!DOCTYPE html>
-{% load static %}
 <html>
 <head>
-    <title>
-        {% block  title%}
-        Roommate Finder
-        {% endblock  %}
-    </title>
-    <link rel = "stylesheet" href="{%static 'css/style.css' %}">
+    <title>Roommate Finder</title>
 </head>
 <body>
     {% if user.is_authenticated %}
@@ -18,18 +12,18 @@
             </style>
             {% endcomment %}
             Hello, {{ user.username }}!
-            <a href="{% url 'profile' %}" style="color: white;">Profile🧑</a> |
-            <a href="{% url 'search_profiles' %}" style="color: white;">Search Profiles🔍</a> |
-            <a href="{% url 'logout' %}" style="color: white;" style="color: white;">Logout🏃</a> |
+            <a href="{% url 'profile' %}">Profile🧑</a> |
+            <a href="{% url 'search_profiles' %}">Search Profiles🔍</a> |
+            <a href="{% url 'logout' %}">Logout🏃</a> |
             {% comment %}
                 incomplete fix when chat system added
             {% endcomment %}
-            <a href="{% url 'profile' %}" style="color: white;">Chat💬</a>
+            <a href="{% url 'profile' %}">Chat💬</a>
         </nav>
     {% else %}
         <nav>
-            <a href="{% url 'login' %}" style="color: white;">Login🚪</a> |
-            <a href="{% url 'register' %}" style="color: white;">Register📋</a>
+          <a href="{% url 'login' %}">Login</a> |
+          <a href="{% url 'register' %}">Register</a>
         </nav>
     {% endif %}
 

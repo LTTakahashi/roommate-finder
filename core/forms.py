@@ -15,7 +15,8 @@ class UserLoginForm(AuthenticationForm):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
 
 
+
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['age', 'location', 'bio']
+        fields = ['location', 'bio', 'age', 'profile_picture']
