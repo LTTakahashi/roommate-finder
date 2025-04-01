@@ -12,9 +12,11 @@
 <body>
     {% if user.is_authenticated %}
         <nav>
+            {% comment %}
             <style>
                 #link {color #ffffff}
             </style>
+            {% endcomment %}
             Hello, {{ user.username }}!
             <a href="{% url 'profile' %}" style="color: white;">Profile🧑</a> |
             <a href="{% url 'search_profiles' %}" style="color: white;">Search Profiles🔍</a> |
