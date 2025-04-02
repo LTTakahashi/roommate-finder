@@ -4,13 +4,12 @@
     <title>Roommate Finder</title>
 </head>
 <body>
+    <link rel = "stylesheet" href="{%staticfiles 'admin/css/style.css' %}">
     {% if user.is_authenticated %}
         <nav>
-            {% comment %}
             <style>
                 #link {color #ffffff}
             </style>
-            {% endcomment %}
             Hello, {{ user.username }}!
             <a href="{% url 'profile' %}">Profile🧑</a> |
             <a href="{% url 'search_profiles' %}">Search Profiles🔍</a> |
