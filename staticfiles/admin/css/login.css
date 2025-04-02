@@ -3,31 +3,25 @@
 .login {
     background: var(--darkened-bg);
     height: auto;
-    text-align: center;
 }
 
 .login #header {
     height: auto;
     padding: 15px 16px;
     justify-content: center;
-    text-align: center;
 }
 
 .login #header h1 {
     font-size: 1.125rem;
     margin: 0;
-    background-color: crimson;
-    text-align: center;
 }
 
 .login #header h1 a {
     color: var(--header-link-color);
-    background-color: crimson;
 }
 
 .login #content {
     padding: 20px;
-    text-align: center;
 }
 
 .login #container {
@@ -39,25 +33,21 @@
     min-width: 300px;
     margin: 100px auto;
     height: auto;
-    text-align: center;
 }
 
 .login .form-row {
     padding: 4px 0;
-    text-align: center;
 }
 
 .login .form-row label {
     display: block;
     line-height: 2em;
-    text-align: center;
 }
 
 .login .form-row #id_username, .login .form-row #id_password {
     padding: 8px;
     width: 100%;
     box-sizing: border-box;
-    text-align: center;
 }
 
 .login .submit-row {
