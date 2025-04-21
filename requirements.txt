@@ -9,3 +9,5 @@ Pillow==9.5.0
 dj_database_url==2.3.0
 psycopg2==2.9.7
 psycopg2-binary==2.9.7
+channels-redis
+daphne
