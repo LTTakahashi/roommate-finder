@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-q=!rv#-4fi6sy7(s9c5za=ch)jq$d@608&9=0&=x1i%t^#*rd-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['roommate-finder-uz2k.onrender.com', '127.0.0.1', 'localhost']
+# settings.py 
+ALLOWED_HOSTS = ['roommate-finder-uz2k.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://roommate-finder-uz2k.onrender.com']
 
 # Application definition
 
