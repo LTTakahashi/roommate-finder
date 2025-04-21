@@ -1,55 +1,57 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>Chat with {{ other_user.username }}</h2>
+
+<!-- Explicitly defined below explicitly -->
 <div id="chat-log" style="white-space: pre-wrap;"></div>
 <input id="chat-message-input" type="text" size="100">
 <button id="chat-message-submit">Send</button>
 
+<!-- Explicitly Fixed JavaScript explicitly here explicitly -->
 <script>
-    const wsScheme = window.location.protocol == "https:" ? "wss" : "ws";
-    const roomName = "{{ room_name }}";
-    
-    // Formulation of WebSocket URL, explicitly logging it
-    const websocketURL = wsScheme + '://' + window.location.host + '/ws/chat/' + roomName + '/';
-    console.log("Connecting to websocket URL:", websocketURL); 
-    
-    const chatSocket = new WebSocket(websocketURL);
-    
-    chatSocket.onopen = function(e) {
-        console.log('🌐 WebSocket connection opened:', e);
-        chatLog.textContent += 'Connected to chat!\n';
-    };
-    
-    chatSocket.onerror = function(e) {
-        console.error('❌ WebSocket connection error:', e);
-        chatLog.textContent += 'WebSocket error occurred! See console.\n';
-    };
-    
-    chatSocket.onmessage = function(e) {
-        const data = JSON.parse(e.data);
-        const chatLog = document.querySelector('#chat-log');
-        chatLog.textContent += (data.message + '\n');
-    };
-    
-    chatSocket.onclose = function(e) {
-        console.error('⚠️ Chat socket closed:', e);
-        const chatLog = document.querySelector('#chat-log');
-        chatLog.textContent += 'Connection closed!\n';
-    };
-    
-    // Sending message robustness
-    document.querySelector('#chat-message-submit').onclick = function(e) {
-        const messageInputDom = document.querySelector('#chat-message-input');
-        const message = messageInputDom.value;
-    
-        // Handling WebSocket ready state properly
-        if (chatSocket.readyState === WebSocket.OPEN) {
-            chatSocket.send(JSON.stringify({'message': message}));
-            messageInputDom.value = '';
-        } else {
-            console.warn("🚫 Can't send message, chat socket is not open!");
-            chatLog.textContent += "Can't send. Socket is not open.\n";
-        }
-    };
-    </script>
+const wsScheme = window.location.protocol == "https:" ? "wss" : "ws";
+const roomName = "{{ room_name }}";
+
+// ADD this explicitly here
+const chatLog = document.querySelector('#chat-log');
+
+const websocketURL = wsScheme + '://' + window.location.host + '/ws/chat/' + roomName + '/';
+console.log("Connecting to websocket URL explicitly:", websocketURL); 
+
+const chatSocket = new WebSocket(websocketURL);
+
+chatSocket.onopen = function(e) {
+    console.log('🌐 WebSocket connection opened:', e);
+    chatLog.textContent += 'Connected to chat!\n';
+};
+
+chatSocket.onerror = function(e) {
+    console.error('❌ WebSocket connection error:', e);
+    chatLog.textContent += 'WebSocket error occurred explicitly! See console.\n';
+};
+
+chatSocket.onmessage = function(e) {
+    const data = JSON.parse(e.data);
+    chatLog.textContent += (data.message + '\n');
+};
+
+chatSocket.onclose = function(e) {
+    console.error('⚠️ Chat socket closed explicitly:', e);
+    chatLog.textContent += 'Connection closed!\n';
+};
+
+document.querySelector('#chat-message-submit').onclick = function(e) {
+    const messageInputDom = document.querySelector('#chat-message-input');
+    const message = messageInputDom.value;
+
+    if (chatSocket.readyState === WebSocket.OPEN) {
+        chatSocket.send(JSON.stringify({'message': message}));
+        messageInputDom.value = '';
+    } else {
+        console.warn("🚫 Can't send explicitly, clearly socket is not explicitly open!");
+        chatLog.textContent += "Can't send explicitly. Socket is not open explicitly.\n";
+    }
+};
+</script>
+
 {% endblock %}
