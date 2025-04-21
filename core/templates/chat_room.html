@@ -6,25 +6,50 @@
 <button id="chat-message-submit">Send</button>
 
 <script>
-const wsScheme = window.location.protocol == "https:" ? "wss" : "ws";
-const roomName = "{{ room_name }}";
-const chatSocket = new WebSocket(wsScheme + '://' + window.location.host + '/ws/chat/' + roomName + '/');
-
-chatSocket.onmessage = function(e) {
-    const data = JSON.parse(e.data);
-    const chatLog = document.querySelector('#chat-log');
-    chatLog.textContent += (data.message + '\n');
-};
-
-chatSocket.onclose = function(e) {
-    console.error('Chat socket closed unexpectedly');
-};
-
-document.querySelector('#chat-message-submit').onclick = function(e) {
-    const messageInputDom = document.querySelector('#chat-message-input');
-    const message = messageInputDom.value;
-    chatSocket.send(JSON.stringify({'message': message}));
-    messageInputDom.value = '';
-};
-</script>
+    const wsScheme = window.location.protocol == "https:" ? "wss" : "ws";
+    const roomName = "{{ room_name }}";
+    
+    // Formulation of WebSocket URL, explicitly logging it
+    const websocketURL = wsScheme + '://' + window.location.host + '/ws/chat/' + roomName + '/';
+    console.log("Connecting to websocket URL:", websocketURL); 
+    
+    const chatSocket = new WebSocket(websocketURL);
+    
+    chatSocket.onopen = function(e) {
+        console.log('🌐 WebSocket connection opened:', e);
+        chatLog.textContent += 'Connected to chat!\n';
+    };
+    
+    chatSocket.onerror = function(e) {
+        console.error('❌ WebSocket connection error:', e);
+        chatLog.textContent += 'WebSocket error occurred! See console.\n';
+    };
+    
+    chatSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        const chatLog = document.querySelector('#chat-log');
+        chatLog.textContent += (data.message + '\n');
+    };
+    
+    chatSocket.onclose = function(e) {
+        console.error('⚠️ Chat socket closed:', e);
+        const chatLog = document.querySelector('#chat-log');
+        chatLog.textContent += 'Connection closed!\n';
+    };
+    
+    // Sending message robustness
+    document.querySelector('#chat-message-submit').onclick = function(e) {
+        const messageInputDom = document.querySelector('#chat-message-input');
+        const message = messageInputDom.value;
+    
+        // Handling WebSocket ready state properly
+        if (chatSocket.readyState === WebSocket.OPEN) {
+            chatSocket.send(JSON.stringify({'message': message}));
+            messageInputDom.value = '';
+        } else {
+            console.warn("🚫 Can't send message, chat socket is not open!");
+            chatLog.textContent += "Can't send. Socket is not open.\n";
+        }
+    };
+    </script>
 {% endblock %}
