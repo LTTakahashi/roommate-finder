@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import UserRegisterForm, UserLoginForm, ProfileUpdateForm, ProfileFilterForm
 from django.db.models import Q
-from .models import Profile
+from .models import Profile, ChatMessage
 
 
 def home(request):
@@ -92,13 +92,17 @@ def search_profiles(request):
 
 @login_required
 def chat_room(request, username):
-    current_user = request.user
     other_user = get_object_or_404(User, username=username)
+    usernames_sorted = sorted([request.user.username, other_user.username])
+    room_name = '-'.join(usernames_sorted)
 
-    room_name = f'{current_user.username}-{other_user.username}'
-    ordered_room_name = '-'.join(sorted([current_user.username, other_user.username]))
+    chat_history = ChatMessage.objects.filter(
+        sender__in=[request.user, other_user],
+        receiver__in=[request.user, other_user]
+    ).order_by('timestamp')
 
     return render(request, 'chat_room.html', {
-        'room_name': ordered_room_name,  # Pass EXACTLY this
-        'other_user': other_user,
+        'room_name': room_name,
+        'other_user':other_user,
+        'chat_history': chat_history
     })
