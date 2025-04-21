@@ -1,9 +1,10 @@
+# core/consumers.py
 from channels.generic.websocket import AsyncWebsocketConsumer
 import json
-from django.contrib.auth.models import User
-from .models import ChatMessage
+from channels.db import database_sync_to_async
 
 class ChatConsumer(AsyncWebsocketConsumer):
+
     async def connect(self):
         user1, user2 = self.scope['url_route']['kwargs']['room_name'].split('-')
         self.room_group_name = f'chat_{ "-".join(sorted([user1, user2])) }'
@@ -20,6 +21,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
         )
 
     async def receive(self, text_data):
+        from django.contrib.auth.models import User  # 👈 Explicit import here explicitly (important)
+        from .models import ChatMessage  # 👈 Explicit import clearly moved in here explicitly
+        
         data = json.loads(text_data)
         sender = self.scope["user"]
         receiver_username = data['receiver']
