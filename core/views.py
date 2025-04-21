@@ -92,11 +92,13 @@ def search_profiles(request):
 
 @login_required
 def chat_room(request, username):
+    current_user = request.user
     other_user = get_object_or_404(User, username=username)
 
-    room_name = "-".join(sorted([request.user.username, other_user.username]))
+    room_name = f'{current_user.username}-{other_user.username}'
+    ordered_room_name = '-'.join(sorted([current_user.username, other_user.username]))
 
     return render(request, 'chat_room.html', {
-        'room_name': room_name,
+        'room_name': ordered_room_name,  # Pass EXACTLY this
         'other_user': other_user,
     })
