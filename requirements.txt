@@ -11,3 +11,5 @@ psycopg2==2.9.7
 psycopg2-binary==2.9.7
 channels-redis
 daphne
+django-crispy-forms 
+crispy-bootstrap5
